@@ -115,7 +115,25 @@ function renderlista() {
 
     crearLista = false
 }
+
+function registrarServiceWorker() {
+    if('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            this.navigator.serviceWorker.register('./sw.js').then(function(reg){
+                console.log("el serviceWorker se registro correctamente ", reg)
+            })
+            .catch (function (err) {
+                console.warn('error al registrar ServiceWorker', err)
+                
+            })
+        })
+    }
+}
+
+
+
 function start(){
+    registrarServiceWorker()
     renderlista()
     configurarListeners()
 }
